@@ -1,2 +1,2 @@
-# myfood-ui
-MyFood Food calories calculator - UI
+# MyFood UI
+[MyFood](https://github.com/devldavydov/myfood) UI with Angular
