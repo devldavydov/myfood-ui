@@ -1,4 +1,10 @@
-export default function FoodList() {
+import { CreateNotificationDanger, NotitficationStore } from "../Notifications";
+
+export interface IFoodListProps {
+  store: NotitficationStore;
+}
+
+export default function FoodList({ store }: IFoodListProps) {
   return (
     <>
       <div className="row mb-3">
@@ -14,13 +20,15 @@ export default function FoodList() {
               className="btn btn-outline-secondary"
               type="button"
               id="btnSearch"
+              onClick={() =>
+                store.addNotification(CreateNotificationDanger("test"))
+              }
             >
               <i className="bi bi-search"></i>
             </button>
           </div>
         </div>
       </div>
-
       <div id="blockLoader" className="spinner-border" hidden>
         <span className="visually-hidden">Loading...</span>
       </div>
