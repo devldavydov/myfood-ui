@@ -1,6 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
+
+export interface IFoodItemLoader {
+  foodKey: string;
+}
+
+export function foodItemLoader({ params }: any): IFoodItemLoader {
+  return { foodKey: params.key };
+}
 
 export default function FoodItem() {
+  const itemLoader = useLoaderData() as IFoodItemLoader;
+
   return (
     <>
       <div id="blockLoader" className="spinner-border" hidden>
@@ -18,7 +28,12 @@ export default function FoodItem() {
               Наименование
             </label>
             <div className="col-sm-4">
-              <input type="text" className="form-control" id="name" value="" />
+              <input
+                type="text"
+                className="form-control"
+                id="name"
+                value={`Ключ: ${itemLoader.foodKey}`}
+              />
             </div>
           </div>
           <div className="row mb-3">
