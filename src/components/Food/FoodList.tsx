@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { CreateNotificationDanger, NotitficationStore } from "../Notifications";
 
 export interface IFoodListProps {
@@ -45,7 +46,19 @@ export default function FoodList({ store }: IFoodListProps) {
               </th>
             </tr>
           </thead>
-          <tbody id="tblFood"></tbody>
+          <tbody id="tblFood">
+            <tr>
+              <td className="align-middle">Йогурт</td>
+              <td className="align-middle">Агуша</td>
+              <td className="align-middle">140</td>
+              <td className="align-middle">Порция 100г.</td>
+              <td className="align-middle text-center">
+                <Link to="test" className="btn btn-sm btn-warning">
+                  <i className="bi bi-pencil"></i>
+                </Link>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </>

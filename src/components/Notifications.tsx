@@ -6,18 +6,6 @@ export interface INotification {
   msg: string;
 }
 
-export function CreateNotificationDanger(msg: string): INotification {
-  return { cls: "danger", msg: msg };
-}
-
-export function CreateNotificationWarning(msg: string): INotification {
-  return { cls: "warning", msg: msg };
-}
-
-export function CreateNotificationInfo(msg: string): INotification {
-  return { cls: "primary", msg: msg };
-}
-
 export class NotitficationStore {
   notifications: INotification[] = [];
 
@@ -59,3 +47,15 @@ const Notifications = observer(({ store }: { store: NotitficationStore }) => {
 });
 
 export default Notifications;
+
+export function CreateNotificationDanger(msg: string): INotification {
+  return { cls: "danger", msg: msg };
+}
+
+export function CreateNotificationWarning(msg: string): INotification {
+  return { cls: "warning", msg: msg };
+}
+
+export function CreateNotificationInfo(msg: string): INotification {
+  return { cls: "primary", msg: msg };
+}

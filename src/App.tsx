@@ -1,6 +1,5 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import FoodItem from "./components/Food/FoodItem";
-import FoodList from "./components/Food/FoodList";
 import Navbar from "./components/Navbar";
 import Notifications from "./components/Notifications";
 import { notifStore } from "./components/Notifications";
@@ -14,9 +13,7 @@ export default function App() {
 
         <Notifications store={notifStore} />
 
-        {/* App pages */}
-        <FoodList store={notifStore} />
-        {/* <FoodItem /> */}
+        <Outlet />
       </div>
     </>
   );

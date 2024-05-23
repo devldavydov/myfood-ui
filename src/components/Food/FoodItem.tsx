@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function FoodItem() {
   return (
     <>
@@ -62,9 +64,9 @@ export default function FoodItem() {
               <textarea className="form-control" id="comment"></textarea>
             </div>
           </div>
-          <a href="/food" className="btn btn-primary me-2">
+          <Link to="/food" className="btn btn-primary me-2">
             <i className="bi bi-box-arrow-left"></i>
-          </a>
+          </Link>
           <button id="btnSet" type="button" className="btn btn-warning me-2">
             <i className="bi bi-floppy"></i>
           </button>

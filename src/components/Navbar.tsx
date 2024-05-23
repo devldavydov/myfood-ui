@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Navbar() {
   return (
     <nav
@@ -22,24 +24,24 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link" href="/food">
+              <Link className="nav-link" to="/food">
                 Еда
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/journal">
+              <Link className="nav-link" to="/journal">
                 Журнал
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/weight">
+              <Link className="nav-link" to="/weight">
                 Вес
-              </a>
+              </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/settings">
+              <Link className="nav-link" to="/settings">
                 Настройки
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
