@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { CreateNotificationDanger, NotitficationStore } from "../Notifications";
+import { CreateNotificationDanger } from "../Notifications";
+import { NotitficationStore } from "../../store/NotificationStore";
 
 export interface IFoodListProps {
   store: NotitficationStore;

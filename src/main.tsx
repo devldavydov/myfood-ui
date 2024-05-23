@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import FoodList from "./components/Food/FoodList.tsx";
-import { notifStore } from "./components/Notifications";
+import { notifStore } from "./store/NotificationStore.tsx";
 import FoodItem from "./components/Food/FoodItem.tsx";
 
 const router = createBrowserRouter([

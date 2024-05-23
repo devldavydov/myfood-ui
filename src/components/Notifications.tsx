@@ -1,28 +1,5 @@
-import { makeAutoObservable } from "mobx";
 import { observer } from "mobx-react-lite";
-
-export interface INotification {
-  cls: string;
-  msg: string;
-}
-
-export class NotitficationStore {
-  notifications: INotification[] = [];
-
-  constructor() {
-    makeAutoObservable(this);
-  }
-
-  addNotification(notif: INotification) {
-    this.notifications.push(notif);
-  }
-
-  deleteNotification(idx: number) {
-    this.notifications.splice(idx, 1);
-  }
-}
-
-export const notifStore = new NotitficationStore();
+import { NotitficationStore, INotification } from "../store/NotificationStore";
 
 const Notifications = observer(({ store }: { store: NotitficationStore }) => {
   return (

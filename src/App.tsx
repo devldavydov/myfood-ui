@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import "./App.css";
 import Navbar from "./components/Navbar";
 import Notifications from "./components/Notifications";
-import { notifStore } from "./components/Notifications";
+import { notifStore } from "./store/NotificationStore";
 
 export default function App() {
   return (
