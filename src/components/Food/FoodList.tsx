@@ -1,28 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 import { CreateNotificationDanger } from "../Notifications";
-import { NotitficationStore } from "../../store/NotificationStore";
 import { useEffect, useState } from "react";
 import { IFood, getFoodList } from "../../services/FoodService";
+import { OutletContext } from "../../routing/OutletContext";
 
-export interface IFoodListProps {
-  store: NotitficationStore;
-}
-
-export default function FoodList({ store }: IFoodListProps) {
+export default function FoodList() {
   const [foodList, setFoodList] = useState<IFood[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
+  const ctx = useOutletContext<OutletContext>();
 
   useEffect(() => {
     getFoodList()
+      .finally(() => {
+        setLoading(false);
+      })
       .then((result) => {
         setFoodList(result);
       })
       .catch(() => {
         setLoadError(true);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   }, []);
 
@@ -42,7 +39,7 @@ export default function FoodList({ store }: IFoodListProps) {
               type="button"
               id="btnSearch"
               onClick={() =>
-                store.addNotification(CreateNotificationDanger("test"))
+                ctx.notifStore.addNotification(CreateNotificationDanger("test"))
               }
             >
               <i className="bi bi-search"></i>

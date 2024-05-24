@@ -9,7 +9,6 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import FoodList from "./components/Food/FoodList.tsx";
-import { notifStore } from "./store/NotificationStore.tsx";
 import FoodItem, { foodItemLoader } from "./components/Food/FoodItem.tsx";
 import Journal from "./components/Journal/Journal.tsx";
 import Weight from "./components/Weight/Weight.tsx";
@@ -22,7 +21,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<App />}>
       <Route errorElement={<Error />}>
         <Route index element={<Stats />} />
-        <Route path="food" element={<FoodList store={notifStore} />} />,
+        <Route path="food" element={<FoodList />} />,
         <Route
           path="food/:key"
           element={<FoodItem />}
