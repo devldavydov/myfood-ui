@@ -1,14 +1,11 @@
-import { Link, useOutletContext } from "react-router-dom";
-import { CreateNotificationDanger } from "../Notifications";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { IFood, getFoodList } from "../../services/FoodService";
-import { OutletContext } from "../../routing/OutletContext";
 
 export default function FoodList() {
   const [foodList, setFoodList] = useState<IFood[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
-  const ctx = useOutletContext<OutletContext>();
 
   useEffect(() => {
     getFoodList()
@@ -38,9 +35,6 @@ export default function FoodList() {
               className="btn btn-outline-secondary"
               type="button"
               id="btnSearch"
-              onClick={() =>
-                ctx.notifStore.addNotification(CreateNotificationDanger("test"))
-              }
             >
               <i className="bi bi-search"></i>
             </button>
