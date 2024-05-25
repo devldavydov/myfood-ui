@@ -1,22 +1,32 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { IFood, getFoodList } from "../../services/FoodService";
+import Loader from "../Loader";
+import Notification, { INotification } from "../Notification";
 
 export default function FoodList() {
   const [foodList, setFoodList] = useState<IFood[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [loadError, setLoadError] = useState(false);
+  const [showLoading, setShowLoading] = useState(true);
+  const [showResult, setShowResult] = useState(false);
+  const [notification, setNotification] = useState<INotification>(
+    {} as INotification
+  );
 
   useEffect(() => {
     getFoodList()
       .finally(() => {
-        setLoading(false);
+        setShowLoading(false);
       })
       .then((result) => {
+        setShowResult(true);
         setFoodList(result);
       })
-      .catch(() => {
-        setLoadError(true);
+      .catch((error: Error) => {
+        setNotification({
+          visible: true,
+          cls: "danger",
+          msg: `Ошибка: ${error.message}`,
+        });
       });
   }, []);
 
@@ -24,7 +34,7 @@ export default function FoodList() {
     <>
       <div className="row mb-3">
         <div className="col-4">
-          <a role="button" href="/food/set" className="btn btn-primary">
+          <a role="button" href="/food/create" className="btn btn-primary">
             <i className="bi bi-plus-square"></i>
           </a>
         </div>
@@ -42,17 +52,11 @@ export default function FoodList() {
         </div>
       </div>
 
-      {loading && (
-        <div className="spinner-border">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-      )}
+      <Loader showLoading={showLoading} />
 
-      {!loading && loadError && (
-        <div className="alert alert-danger">Ошибка загрузки</div>
-      )}
+      <Notification notification={notification} />
 
-      {!loading && !loadError && (
+      {showResult && (
         <div className="table-responsive">
           <table className="table table-bordered table-hover">
             <thead>
@@ -75,7 +79,10 @@ export default function FoodList() {
                     <td className="align-middle">{f.cal100}</td>
                     <td className="align-middle">{f.comment}</td>
                     <td className="align-middle text-center">
-                      <Link to={f.key} className="btn btn-sm btn-warning">
+                      <Link
+                        to={`edit/${f.key}`}
+                        className="btn btn-sm btn-warning"
+                      >
                         <i className="bi bi-pencil"></i>
                       </Link>
                     </td>
