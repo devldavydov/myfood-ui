@@ -9,7 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import FoodList from "./components/Food/FoodList.tsx";
-import FoodItem, { foodItemLoader } from "./components/Food/FoodItem.tsx";
+import FoodItem from "./components/Food/FoodItem.tsx";
 import Journal from "./components/Journal/Journal.tsx";
 import Weight from "./components/Weight/Weight.tsx";
 import Settings from "./components/Settings/Settings.tsx";
@@ -22,12 +22,8 @@ const router = createBrowserRouter(
       <Route errorElement={<RouteError />}>
         <Route index element={<Stats />} />
         <Route path="food" element={<FoodList />} />,
-        <Route
-          path="food/edit/:key"
-          element={<FoodItem />}
-          loader={foodItemLoader}
-        />
-        ,
+        <Route path="food/edit/:key" element={<FoodItem isEdit={true} />} />,
+        <Route path="food/create" element={<FoodItem isEdit={false} />} />
         <Route path="journal" element={<Journal />} />,
         <Route path="weight" element={<Weight />} />
         <Route path="settings" element={<Settings />} />

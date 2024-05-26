@@ -34,9 +34,9 @@ export default function FoodList() {
     <>
       <div className="row mb-3">
         <div className="col-4">
-          <a role="button" href="/food/create" className="btn btn-primary">
+          <Link to="/food/create" className="btn btn-primary">
             <i className="bi bi-plus-square"></i>
-          </a>
+          </Link>
         </div>
         <div className="col-8">
           <div className="input-group float-end">

@@ -1,36 +1,40 @@
-import { Link, redirect, useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { IFood, delFood, getFood } from "../../services/FoodService";
 import { useEffect, useState } from "react";
 import Loader from "../Loader";
 import Notification, { INotification } from "../Notification";
 
-export interface IFoodItemLoader {
-  foodKey: string;
+export interface IFoodItemProps {
+  isEdit: boolean;
 }
 
-export function foodItemLoader({ params }: any): IFoodItemLoader {
-  return { foodKey: params.key };
-}
-
-export default function FoodItem() {
-  const itemLoader = useLoaderData() as IFoodItemLoader;
+export default function FoodItem({ isEdit }: IFoodItemProps) {
   const [foodItem, setFoodItem] = useState<IFood>({} as IFood);
-  const [showLoading, setShowLoading] = useState(true);
+  const [showLoading, setShowLoading] = useState(isEdit);
   const [showLoadError, setShowLoadError] = useState(false);
-  const [showLoadResult, setShowLoadResult] = useState(false);
+  const [showItemForm, setShowItemForm] = useState(!isEdit);
   const [notification, setNotification] = useState<INotification>(
     {} as INotification
   );
+  const [btnDisabled, setBtnDisabled] = useState(false);
   const navigate = useNavigate();
+  const { key } = useParams();
 
   useEffect(() => {
-    getFood(itemLoader.foodKey)
+    if (!isEdit) {
+      // Set new empty food item
+      setFoodItem({} as IFood);
+      return;
+    }
+
+    // Load when edit
+    getFood(key as string)
       .finally(() => {
         setShowLoading(false);
       })
       .then((result) => {
         setFoodItem(result);
-        setShowLoadResult(true);
+        setShowItemForm(true);
       })
       .catch((error: Error) => {
         setNotification({
@@ -45,12 +49,12 @@ export default function FoodItem() {
   const onDelete = (key: string) => {
     if (!confirm("Вы действительно хотите удалить еду?")) return;
 
-    setShowLoading(true);
     setNotification({ visible: false });
+    setBtnDisabled(true);
 
     delFood(key)
       .finally(() => {
-        setShowLoading(false);
+        setBtnDisabled(false);
       })
       .then(() => navigate("/food"))
       .catch((error: Error) => {
@@ -62,10 +66,15 @@ export default function FoodItem() {
       });
   };
 
+  const onSave = () => {};
+
   return (
     <>
       <Loader showLoading={showLoading} />
       <Notification notification={notification} />
+
+      {/* Edit mode */}
+
       {showLoadError && (
         <>
           <a href="/food" className="btn btn-primary">
@@ -73,7 +82,7 @@ export default function FoodItem() {
           </a>
         </>
       )}
-      {showLoadResult && (
+      {showItemForm && (
         <>
           <form>
             <div className="row mb-3">
@@ -187,17 +196,26 @@ export default function FoodItem() {
             <Link to="/food" className="btn btn-primary me-2">
               <i className="bi bi-box-arrow-left"></i>
             </Link>
-            <button id="btnSet" type="button" className="btn btn-warning me-2">
+            <button
+              id="btnSet"
+              type="button"
+              className="btn btn-warning me-2"
+              onClick={onSave}
+              disabled={btnDisabled}
+            >
               <i className="bi bi-floppy"></i>
             </button>
-            <button
-              id="btnDelete"
-              type="button"
-              className="btn btn-danger"
-              onClick={() => onDelete(foodItem.key)}
-            >
-              <i className="bi bi-trash"></i>
-            </button>
+            {isEdit && (
+              <button
+                id="btnDelete"
+                type="button"
+                className="btn btn-danger"
+                disabled={btnDisabled}
+                onClick={() => onDelete(foodItem.key)}
+              >
+                <i className="bi bi-trash"></i>
+              </button>
+            )}
           </form>
         </>
       )}
