@@ -12,6 +12,11 @@ export interface IFood {
   comment: string;
 }
 
+export interface IFoodSet {
+  food: IFood;
+  isEdit: boolean;
+}
+
 export async function getFoodList() {
   const resp = await axios.get<IApiResponse>("/api/food");
 
@@ -55,6 +60,14 @@ export async function getFood(key: string) {
 
 export async function delFood(key: string) {
   const resp = await axios.delete<IApiResponse>(`/api/food/${key}`);
+  if (resp.data.error) {
+    throw new Error(resp.data.error);
+  }
+  return;
+}
+
+export async function setFood(foodSet: IFoodSet) {
+  const resp = await axios.post<IApiResponse>("/api/food/set", foodSet);
   if (resp.data.error) {
     throw new Error(resp.data.error);
   }

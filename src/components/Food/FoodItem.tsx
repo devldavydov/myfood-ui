@@ -1,5 +1,11 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { IFood, delFood, getFood } from "../../services/FoodService";
+import {
+  IFood,
+  IFoodSet,
+  delFood,
+  getFood,
+  setFood,
+} from "../../services/FoodService";
 import { useEffect, useState } from "react";
 import Loader from "../Loader";
 import Notification, { INotification } from "../Notification";
@@ -66,7 +72,35 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
       });
   };
 
-  const onSave = () => {};
+  const onSave = () => {
+    setNotification({ visible: false });
+    setBtnDisabled(true);
+
+    setFood({
+      isEdit: isEdit,
+      food: {
+        key: isEdit ? foodItem.key : "",
+        name: foodItem.name,
+        brand: foodItem.brand,
+        cal100: foodItem.cal100,
+        prot100: foodItem.prot100,
+        fat100: foodItem.fat100,
+        carb100: foodItem.carb100,
+        comment: foodItem.comment,
+      } as IFood,
+    } as IFoodSet)
+      .finally(() => {
+        setBtnDisabled(false);
+      })
+      .then(() => navigate("/food"))
+      .catch((error: Error) => {
+        setNotification({
+          visible: true,
+          cls: "danger",
+          msg: `Ошибка: ${error.message}`,
+        });
+      });
+  };
 
   return (
     <>
