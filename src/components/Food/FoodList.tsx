@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { IFood, getFoodList } from "../../services/FoodService";
 import Loader from "../Loader";
 import Notification, { INotification } from "../Notification";
+import Pagination, { paginate } from "../Pagination";
 
 export default function FoodList() {
   const [foodList, setFoodList] = useState<IFood[]>([]);
@@ -11,6 +12,9 @@ export default function FoodList() {
   const [notification, setNotification] = useState<INotification>(
     {} as INotification
   );
+  const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const pageSize = 10;
 
   useEffect(() => {
     getFoodList()
@@ -30,6 +34,20 @@ export default function FoodList() {
       });
   }, []);
 
+  const filteredFoodList = foodList.filter((f) => {
+    const pattern = search.toLocaleUpperCase();
+    return (
+      f.name.toLocaleUpperCase().indexOf(pattern) !== -1 ||
+      f.brand.toLocaleUpperCase().indexOf(pattern) !== -1 ||
+      f.comment.toLocaleUpperCase().indexOf(pattern) !== -1
+    );
+  });
+  const pagedFoodList = paginate<IFood>(
+    filteredFoodList,
+    currentPage,
+    pageSize
+  );
+
   return (
     <>
       <div className="row mb-3">
@@ -40,14 +58,19 @@ export default function FoodList() {
         </div>
         <div className="col-8">
           <div className="input-group float-end">
-            <input type="text" className="form-control" />
-            <button
-              className="btn btn-outline-secondary"
-              type="button"
-              id="btnSearch"
-            >
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Поиск"
+              defaultValue={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setCurrentPage(1);
+              }}
+            />
+            <span className="input-group-text" id="basic-addon2">
               <i className="bi bi-search"></i>
-            </button>
+            </span>
           </div>
         </div>
       </div>
@@ -71,7 +94,7 @@ export default function FoodList() {
               </tr>
             </thead>
             <tbody id="tblFood">
-              {foodList.map((f) => {
+              {pagedFoodList.map((f) => {
                 return (
                   <tr key={f.key}>
                     <td className="align-middle">{f.name}</td>
@@ -91,6 +114,12 @@ export default function FoodList() {
               })}
             </tbody>
           </table>
+          <Pagination
+            itemsCount={filteredFoodList.length}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={(idx: number) => setCurrentPage(idx)}
+          />
         </div>
       )}
     </>

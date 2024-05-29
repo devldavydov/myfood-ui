@@ -128,7 +128,10 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
                   type="text"
                   className="form-control"
                   id="name"
-                  value={foodItem.name}
+                  defaultValue={foodItem.name}
+                  onChange={(e) =>
+                    setFoodItem({ ...foodItem, name: e.target.value })
+                  }
                 />
               </div>
             </div>
@@ -144,7 +147,10 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
                   type="text"
                   className="form-control"
                   id="brand"
-                  value={foodItem.brand}
+                  defaultValue={foodItem.brand}
+                  onChange={(e) =>
+                    setFoodItem({ ...foodItem, brand: e.target.value })
+                  }
                 />
               </div>
             </div>
@@ -157,10 +163,17 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
               </label>
               <div className="col-sm-4">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
+                  step="0.01"
                   id="cal100"
-                  value={foodItem.cal100}
+                  defaultValue={foodItem.cal100}
+                  onChange={(e) =>
+                    setFoodItem({
+                      ...foodItem,
+                      cal100: parseFloat(e.target.value),
+                    })
+                  }
                 />
               </div>
             </div>
@@ -173,10 +186,17 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
               </label>
               <div className="col-sm-4">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   id="prot100"
-                  value={foodItem.prot100}
+                  step="0.01"
+                  defaultValue={foodItem.prot100}
+                  onChange={(e) =>
+                    setFoodItem({
+                      ...foodItem,
+                      prot100: parseFloat(e.target.value),
+                    })
+                  }
                 />
               </div>
             </div>
@@ -189,10 +209,17 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
               </label>
               <div className="col-sm-4">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   id="fat100"
-                  value={foodItem.fat100}
+                  step="0.01"
+                  defaultValue={foodItem.fat100}
+                  onChange={(e) =>
+                    setFoodItem({
+                      ...foodItem,
+                      fat100: parseFloat(e.target.value),
+                    })
+                  }
                 />
               </div>
             </div>
@@ -205,10 +232,17 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
               </label>
               <div className="col-sm-4">
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   id="carb100"
-                  value={foodItem.carb100}
+                  step="0.01"
+                  defaultValue={foodItem.carb100}
+                  onChange={(e) =>
+                    setFoodItem({
+                      ...foodItem,
+                      carb100: parseFloat(e.target.value),
+                    })
+                  }
                 />
               </div>
             </div>
@@ -223,7 +257,10 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
                 <textarea
                   className="form-control"
                   id="comment"
-                  value={foodItem.comment}
+                  defaultValue={foodItem.comment}
+                  onChange={(e) =>
+                    setFoodItem({ ...foodItem, comment: e.target.value })
+                  }
                 />
               </div>
             </div>
