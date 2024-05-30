@@ -4,6 +4,45 @@ import { IFood, getFoodList } from "../../services/FoodService";
 import Loader from "../Loader";
 import Notification, { INotification } from "../Notification";
 import Pagination, { paginate } from "../Pagination";
+import TableHeader, {
+  ITableHeaderColumn,
+  ITableHeaderColumnSort,
+  SortOrder,
+} from "../TableHeader";
+
+const columns: ITableHeaderColumn[] = [
+  {
+    key: "name",
+    title: "Наименование",
+    className: "align-middle",
+    isSortable: true,
+  },
+  {
+    key: "brand",
+    title: "Бренд",
+    className: "align-middle",
+    isSortable: true,
+  },
+  {
+    key: "cal100",
+    title: "ККал, 100г.",
+    className: "align-middle",
+    isSortable: true,
+  },
+  {
+    key: "comment",
+    title: "Комментарий",
+    className: "align-middle",
+    isSortable: false,
+  },
+  {
+    key: "settings",
+    title: "Настройки",
+    icon: <i className="bi bi-pencil"></i>,
+    className: "align-middle text-center",
+    isSortable: false,
+  },
+];
 
 export default function FoodList() {
   const [foodList, setFoodList] = useState<IFood[]>([]);
@@ -14,6 +53,10 @@ export default function FoodList() {
   );
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState<ITableHeaderColumnSort>({
+    colKey: columns[0].key,
+    order: SortOrder.ASC,
+  });
   const pageSize = 10;
 
   useEffect(() => {
@@ -42,11 +85,26 @@ export default function FoodList() {
       f.comment.toLocaleUpperCase().indexOf(pattern) !== -1
     );
   });
-  const pagedFoodList = paginate<IFood>(
-    filteredFoodList,
-    currentPage,
-    pageSize
-  );
+  const sortedFoodList = filteredFoodList.sort((a, b) => {
+    const asc = sort.order === SortOrder.ASC;
+    switch (sort.colKey) {
+      // name
+      case columns[0].key:
+        return asc
+          ? a.name.localeCompare(b.name)
+          : -1 * a.name.localeCompare(b.name);
+      // brand
+      case columns[1].key:
+        return asc
+          ? a.brand.localeCompare(b.brand)
+          : -1 * a.brand.localeCompare(b.brand);
+      // cal100
+      case columns[2].key:
+        return asc ? a.cal100 - b.cal100 : b.cal100 - a.cal100;
+    }
+    return 0;
+  });
+  const pagedFoodList = paginate<IFood>(sortedFoodList, currentPage, pageSize);
 
   return (
     <>
@@ -82,17 +140,14 @@ export default function FoodList() {
       {showResult && (
         <div className="table-responsive">
           <table className="table table-bordered table-hover">
-            <thead>
-              <tr className="table-light">
-                <th className="align-middle">Наименование</th>
-                <th className="align-middle">Бренд</th>
-                <th className="align-middle">ККал, 100г.</th>
-                <th className="align-middle">Комментарий</th>
-                <th className="align-middle text-center">
-                  <i className="bi bi-gear"></i>
-                </th>
-              </tr>
-            </thead>
+            <TableHeader
+              currentSort={sort}
+              columns={columns}
+              onSort={(sort) => {
+                setSort(sort);
+                setCurrentPage(1);
+              }}
+            />
             <tbody id="tblFood">
               {pagedFoodList.map((f) => {
                 return (
