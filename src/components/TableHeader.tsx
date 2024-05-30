@@ -42,6 +42,13 @@ export default function TableHeader({
     onSort(newSort);
   };
 
+  const renderSortIcon = (c: ITableHeaderColumn) => {
+    if (!c.isSortable || c.key !== currentSort.colKey) return null;
+    if (currentSort.order === SortOrder.ASC)
+      return <i className="bi bi-sort-up-alt"></i>;
+    return <i className="bi bi-sort-down"></i>;
+  };
+
   return (
     <thead>
       <tr className="table-light">
@@ -59,15 +66,7 @@ export default function TableHeader({
                 raiseSort(c.key);
               }}
             >
-              {c.icon || c.title}
-              {c.isSortable && c.key === currentSort.colKey && (
-                <i
-                  className={
-                    "m-2 bi bi-sort-" +
-                    (currentSort.order === SortOrder.ASC ? "up-alt" : "down")
-                  }
-                ></i>
-              )}
+              {c.icon || c.title} {renderSortIcon(c)}
             </th>
           );
         })}
