@@ -14,32 +14,32 @@ const columns: ITableHeaderColumn[] = [
   {
     key: "name",
     title: "Наименование",
-    className: "align-middle",
+    className: "align-middle col-5",
     isSortable: true,
   },
   {
     key: "brand",
     title: "Бренд",
-    className: "align-middle",
+    className: "align-middle col-2",
     isSortable: true,
   },
   {
     key: "cal100",
     title: "ККал, 100г.",
-    className: "align-middle",
+    className: "align-middle col-2",
     isSortable: true,
   },
   {
     key: "comment",
     title: "Комментарий",
-    className: "align-middle",
+    className: "align-middle col-2",
     isSortable: false,
   },
   {
     key: "settings",
     title: "Настройки",
     icon: <i className="bi bi-pencil"></i>,
-    className: "align-middle text-center",
+    className: "align-middle text-center col-1",
     isSortable: false,
   },
 ];
