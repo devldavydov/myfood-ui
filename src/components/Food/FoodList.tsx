@@ -9,6 +9,9 @@ import TableHeader, {
   ITableHeaderColumnSort,
   SortOrder,
 } from "../TableHeader";
+import TableBody, { ITableBodyRow } from "../TableBody";
+import Search from "../Search";
+import ButtonAdd from "../ButtonAdd";
 
 const columns: ITableHeaderColumn[] = [
   {
@@ -110,26 +113,17 @@ export default function FoodList() {
     <>
       <div className="row mb-3">
         <div className="col-4">
-          <Link to="/food/create" className="btn btn-primary">
-            <i className="bi bi-plus-square"></i>
-          </Link>
+          <ButtonAdd linkTo="/food/create" />
         </div>
         <div className="col-8">
-          <div className="input-group float-end">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Поиск"
-              defaultValue={search}
-              onChange={(e) => {
-                setSearch(e.target.value);
-                setCurrentPage(1);
-              }}
-            />
-            <span className="input-group-text" id="basic-addon2">
-              <i className="bi bi-search"></i>
-            </span>
-          </div>
+          <Search
+            classNameFloat="float-end"
+            search={search}
+            onSearchChange={(s) => {
+              setSearch(s);
+              setCurrentPage(1);
+            }}
+          />
         </div>
       </div>
 
@@ -148,26 +142,42 @@ export default function FoodList() {
                 setCurrentPage(1);
               }}
             />
-            <tbody id="tblFood">
-              {pagedFoodList.map((f) => {
-                return (
-                  <tr key={f.key}>
-                    <td className="align-middle">{f.name}</td>
-                    <td className="align-middle">{f.brand}</td>
-                    <td className="align-middle">{f.cal100}</td>
-                    <td className="align-middle">{f.comment}</td>
-                    <td className="align-middle text-center">
-                      <Link
-                        to={`edit/${f.key}`}
-                        className="btn btn-sm btn-warning"
-                      >
-                        <i className="bi bi-pencil"></i>
-                      </Link>
-                    </td>
-                  </tr>
-                );
+            <TableBody
+              rows={pagedFoodList.map((f) => {
+                return {
+                  key: f.key,
+                  cells: [
+                    {
+                      value: f.name,
+                      className: "align-middle",
+                    },
+                    {
+                      value: f.brand,
+                      className: "align-middle",
+                    },
+                    {
+                      value: f.cal100,
+                      className: "align-middle",
+                    },
+                    {
+                      value: f.comment,
+                      className: "align-middle",
+                    },
+                    {
+                      content: (
+                        <Link
+                          to={`edit/${f.key}`}
+                          className="btn btn-sm btn-warning"
+                        >
+                          <i className="bi bi-pencil"></i>
+                        </Link>
+                      ),
+                      className: "align-middle text-center",
+                    },
+                  ],
+                } as ITableBodyRow;
               })}
-            </tbody>
+            />
           </table>
           <Pagination
             itemsCount={filteredFoodList.length}
