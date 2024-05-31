@@ -1,16 +1,16 @@
 export interface ISearchProps {
-  classNameFloat: string;
+  optClass: string[];
   search: string;
   onSearchChange: (search: string) => void;
 }
 
 export default function Search({
-  classNameFloat,
+  optClass,
   search,
   onSearchChange,
 }: ISearchProps) {
   return (
-    <div className={"input-group " + classNameFloat}>
+    <div className={["input-group", ...optClass].join(" ")}>
       <input
         type="text"
         className="form-control"

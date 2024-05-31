@@ -7,8 +7,10 @@ import {
   setFood,
 } from "../../services/FoodService";
 import { useEffect, useState } from "react";
-import Loader from "../Loader";
-import Notification, { INotification } from "../Notification";
+import Loader from "../common/Loader";
+import Notification, { INotification } from "../common/Notification";
+import ButtonSave from "../common/ButtonSave";
+import ButtonDelete from "../common/ButtonDelete";
 
 export interface IFoodItemProps {
   isEdit: boolean;
@@ -267,25 +269,17 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
             <Link to="/food" className="btn btn-primary me-2">
               <i className="bi bi-box-arrow-left"></i>
             </Link>
-            <button
-              id="btnSet"
-              type="button"
-              className="btn btn-warning me-2"
+            <ButtonSave
+              optClass={["me-2"]}
               onClick={onSave}
               disabled={btnDisabled}
-            >
-              <i className="bi bi-floppy"></i>
-            </button>
+            />
             {isEdit && (
-              <button
-                id="btnDelete"
-                type="button"
-                className="btn btn-danger"
+              <ButtonDelete
+                optClass={[]}
                 disabled={btnDisabled}
                 onClick={() => onDelete(foodItem.key)}
-              >
-                <i className="bi bi-trash"></i>
-              </button>
+              />
             )}
           </form>
         </>

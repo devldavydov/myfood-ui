@@ -13,7 +13,7 @@ import FoodItem from "./components/food/FoodItem.tsx";
 import Journal from "./components/journal/Journal.tsx";
 import Weight from "./components/weight/Weight.tsx";
 import Settings from "./components/settings/Settings.tsx";
-import RouteError from "./components/RouteError.tsx";
+import RouteError from "./components/common/RouteError.tsx";
 import Stats from "./components/stats/Stats.tsx";
 
 const router = createBrowserRouter(

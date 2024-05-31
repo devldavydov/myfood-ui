@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { IFood, getFoodList } from "../../services/FoodService";
-import Loader from "../Loader";
-import Notification, { INotification } from "../Notification";
-import Pagination, { paginate } from "../Pagination";
+import Loader from "../common/Loader";
+import Notification, { INotification } from "../common/Notification";
+import Pagination, { paginate } from "../common/Pagination";
 import TableHeader, {
   ITableHeaderColumn,
   ITableHeaderColumnSort,
   SortOrder,
-} from "../TableHeader";
-import TableBody, { ITableBodyRow } from "../TableBody";
-import Search from "../Search";
-import ButtonAdd from "../ButtonAdd";
+} from "../common/TableHeader";
+import TableBody, { ITableBodyRow } from "../common/TableBody";
+import Search from "../common/Search";
+import ButtonAdd from "../common/ButtonAdd";
 
 const columns: ITableHeaderColumn[] = [
   {
@@ -117,7 +117,7 @@ export default function FoodList() {
         </div>
         <div className="col-8">
           <Search
-            classNameFloat="float-end"
+            optClass="float-end"
             search={search}
             onSearchChange={(s) => {
               setSearch(s);
