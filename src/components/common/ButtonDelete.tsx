@@ -1,5 +1,5 @@
 export interface IButtonSaveProps {
-  optClass: string[];
+  optClass?: string[];
   disabled: boolean;
   onClick: () => void;
 }
@@ -13,7 +13,7 @@ export default function ButtonDelete({
     <button
       id="btnDelete"
       type="button"
-      className={["btn", "btn-danger", ...optClass].join(" ")}
+      className={["btn", "btn-danger", ...(optClass ? optClass : [])].join(" ")}
       onClick={onClick}
       disabled={disabled}
     >

@@ -11,7 +11,7 @@ import TableHeader, {
 } from "../common/TableHeader";
 import TableBody, { ITableBodyRow } from "../common/TableBody";
 import Search from "../common/Search";
-import ButtonAdd from "../common/ButtonAdd";
+import ButtonLink from "../common/ButtonLink";
 
 const columns: ITableHeaderColumn[] = [
   {
@@ -113,11 +113,11 @@ export default function FoodList() {
     <>
       <div className="row mb-3">
         <div className="col-4">
-          <ButtonAdd linkTo="/food/create" />
+          <ButtonLink linkTo="/food/create" iconClass="bi-plus-square" />
         </div>
         <div className="col-8">
           <Search
-            optClass="float-end"
+            optClass={["float-end"]}
             search={search}
             onSearchChange={(s) => {
               setSearch(s);

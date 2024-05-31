@@ -1,5 +1,5 @@
 export interface ISearchProps {
-  optClass: string[];
+  optClass?: string[];
   search: string;
   onSearchChange: (search: string) => void;
 }
@@ -10,18 +10,26 @@ export default function Search({
   onSearchChange,
 }: ISearchProps) {
   return (
-    <div className={["input-group", ...optClass].join(" ")}>
+    <div className={["input-group", ...(optClass ? optClass : [])].join(" ")}>
+      <span className="input-group-text" id="basic-addon2">
+        <i className="bi bi-search"></i>
+      </span>
       <input
         type="text"
         className="form-control"
         placeholder="Поиск"
-        defaultValue={search}
+        value={search}
         onChange={(e) => {
           onSearchChange(e.target.value);
         }}
       />
-      <span className="input-group-text" id="basic-addon2">
-        <i className="bi bi-search"></i>
+      <span
+        role="button"
+        className="input-group-text"
+        id="basic-addon2"
+        onClick={() => onSearchChange("")}
+      >
+        <i className="bi bi-x-lg"></i>
       </span>
     </div>
   );

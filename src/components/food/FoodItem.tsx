@@ -11,6 +11,7 @@ import Loader from "../common/Loader";
 import Notification, { INotification } from "../common/Notification";
 import ButtonSave from "../common/ButtonSave";
 import ButtonDelete from "../common/ButtonDelete";
+import ButtonLink from "../common/ButtonLink";
 
 export interface IFoodItemProps {
   isEdit: boolean;
@@ -109,14 +110,8 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
       <Loader showLoading={showLoading} />
       <Notification notification={notification} />
 
-      {/* Edit mode */}
-
       {showLoadError && (
-        <>
-          <a href="/food" className="btn btn-primary">
-            <i className="bi bi-box-arrow-left"></i>
-          </a>
-        </>
+        <ButtonLink linkTo="/food" iconClass="bi-box-arrow-left" />
       )}
       {showItemForm && (
         <>
@@ -266,9 +261,11 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
                 />
               </div>
             </div>
-            <Link to="/food" className="btn btn-primary me-2">
-              <i className="bi bi-box-arrow-left"></i>
-            </Link>
+            <ButtonLink
+              linkTo="/food"
+              iconClass="bi-box-arrow-left"
+              optClass={["me-2"]}
+            />
             <ButtonSave
               optClass={["me-2"]}
               onClick={onSave}
@@ -276,7 +273,6 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
             />
             {isEdit && (
               <ButtonDelete
-                optClass={[]}
                 disabled={btnDisabled}
                 onClick={() => onDelete(foodItem.key)}
               />

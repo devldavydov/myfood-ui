@@ -1,5 +1,5 @@
 export interface IButtonSaveProps {
-  optClass: string[];
+  optClass?: string[];
   disabled: boolean;
   onClick: () => void;
 }
@@ -13,7 +13,9 @@ export default function ButtonSave({
     <button
       id="btnSet"
       type="button"
-      className={["btn", "btn-warning", ...optClass].join(" ")}
+      className={["btn", "btn-warning", ...(optClass ? optClass : [])].join(
+        " "
+      )}
       onClick={onClick}
       disabled={disabled}
     >
