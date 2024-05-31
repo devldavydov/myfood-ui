@@ -8,13 +8,13 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import FoodList from "./components/Food/FoodList.tsx";
-import FoodItem from "./components/Food/FoodItem.tsx";
-import Journal from "./components/Journal/Journal.tsx";
-import Weight from "./components/Weight/Weight.tsx";
-import Settings from "./components/Settings/Settings.tsx";
+import FoodList from "./components/food/FoodList.tsx";
+import FoodItem from "./components/food/FoodItem.tsx";
+import Journal from "./components/journal/Journal.tsx";
+import Weight from "./components/weight/Weight.tsx";
+import Settings from "./components/settings/Settings.tsx";
 import RouteError from "./components/RouteError.tsx";
-import Stats from "./components/Stats/Stats.tsx";
+import Stats from "./components/stats/Stats.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
