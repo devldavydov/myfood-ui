@@ -4,14 +4,15 @@ import { IFood, getFoodList } from "../../services/FoodService";
 import Loader from "../common/Loader";
 import Notification, { INotification } from "../common/Notification";
 import Pagination, { paginate } from "../common/Pagination";
-import TableHeader, {
+import {
   ITableHeaderColumn,
   ITableHeaderColumnSort,
   SortOrder,
 } from "../common/TableHeader";
-import TableBody, { ITableBodyRow } from "../common/TableBody";
+import { ITableBodyRow } from "../common/TableBody";
 import Search from "../common/Search";
 import ButtonLink from "../common/ButtonLink";
+import Table from "../common/Table";
 
 const columns: ITableHeaderColumn[] = [
   {
@@ -133,52 +134,49 @@ export default function FoodList() {
 
       {showResult && (
         <div className="table-responsive">
-          <table className="table table-bordered table-hover">
-            <TableHeader
-              currentSort={sort}
-              columns={columns}
-              onSort={(sort) => {
-                setSort(sort);
-                setCurrentPage(1);
-              }}
-            />
-            <TableBody
-              rows={pagedFoodList.map((f) => {
-                return {
-                  key: f.key,
-                  cells: [
-                    {
-                      value: f.name,
-                      className: "align-middle",
-                    },
-                    {
-                      value: f.brand,
-                      className: "align-middle",
-                    },
-                    {
-                      value: f.cal100,
-                      className: "align-middle",
-                    },
-                    {
-                      value: f.comment,
-                      className: "align-middle",
-                    },
-                    {
-                      content: (
-                        <Link
-                          to={`edit/${f.key}`}
-                          className="btn btn-sm btn-warning"
-                        >
-                          <i className="bi bi-pencil"></i>
-                        </Link>
-                      ),
-                      className: "align-middle text-center",
-                    },
-                  ],
-                } as ITableBodyRow;
-              })}
-            />
-          </table>
+          <Table
+            className="table table-bordered table-hover"
+            currentSort={sort}
+            columns={columns}
+            onSort={(sort) => {
+              setSort(sort);
+              setCurrentPage(1);
+            }}
+            rows={pagedFoodList.map((f) => {
+              return {
+                key: f.key,
+                cells: [
+                  {
+                    value: f.name,
+                    className: "align-middle",
+                  },
+                  {
+                    value: f.brand,
+                    className: "align-middle",
+                  },
+                  {
+                    value: f.cal100,
+                    className: "align-middle",
+                  },
+                  {
+                    value: f.comment,
+                    className: "align-middle",
+                  },
+                  {
+                    content: (
+                      <Link
+                        to={`edit/${f.key}`}
+                        className="btn btn-sm btn-warning"
+                      >
+                        <i className="bi bi-pencil"></i>
+                      </Link>
+                    ),
+                    className: "align-middle text-center",
+                  },
+                ],
+              } as ITableBodyRow;
+            })}
+          />
           <Pagination
             itemsCount={filteredFoodList.length}
             pageSize={pageSize}

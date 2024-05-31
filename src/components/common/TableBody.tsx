@@ -3,7 +3,7 @@ import { ReactElement } from "react";
 export interface ITableBodyCell {
   value?: string;
   content?: ReactElement;
-  className: string;
+  className?: string;
 }
 
 export interface ITableBodyRow {
