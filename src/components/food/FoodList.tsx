@@ -8,11 +8,11 @@ import {
   ITableHeaderColumn,
   ITableHeaderColumnSort,
   SortOrder,
-} from "../common/TableHeader";
-import { ITableBodyRow } from "../common/TableBody";
+} from "../common/table/TableHeader";
+import { ITableBodyRow } from "../common/table/TableBody";
 import Search from "../common/Search";
-import ButtonLink from "../common/ButtonLink";
-import Table from "../common/Table";
+import ButtonLink from "../common/button/ButtonLink";
+import Table from "../common/table/Table";
 
 const columns: ITableHeaderColumn[] = [
   {

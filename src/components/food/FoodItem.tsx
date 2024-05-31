@@ -9,9 +9,9 @@ import {
 import { useEffect, useState } from "react";
 import Loader from "../common/Loader";
 import Notification, { INotification } from "../common/Notification";
-import ButtonSave from "../common/ButtonSave";
-import ButtonDelete from "../common/ButtonDelete";
-import ButtonLink from "../common/ButtonLink";
+import ButtonSave from "../common/button/ButtonSave";
+import ButtonDelete from "../common/button/ButtonDelete";
+import ButtonLink from "../common/button/ButtonLink";
 
 export interface IFoodItemProps {
   isEdit: boolean;
