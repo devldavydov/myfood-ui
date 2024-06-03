@@ -1,3 +1,5 @@
+import { Button } from "react-bootstrap";
+
 export interface IButtonSaveProps {
   optClass?: string[];
   disabled: boolean;
@@ -10,16 +12,13 @@ export default function ButtonSave({
   onClick,
 }: IButtonSaveProps) {
   return (
-    <button
-      id="btnSet"
-      type="button"
-      className={["btn", "btn-warning", ...(optClass ? optClass : [])].join(
-        " "
-      )}
+    <Button
+      variant="warning"
+      className={[...(optClass ? optClass : [])].join(" ")}
       onClick={onClick}
       disabled={disabled}
     >
       <i className="bi bi-floppy"></i>
-    </button>
+    </Button>
   );
 }

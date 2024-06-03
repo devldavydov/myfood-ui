@@ -1,3 +1,5 @@
+import { Button } from "react-bootstrap";
+
 export interface IButtonSaveProps {
   optClass?: string[];
   disabled: boolean;
@@ -10,14 +12,13 @@ export default function ButtonDelete({
   onClick,
 }: IButtonSaveProps) {
   return (
-    <button
-      id="btnDelete"
-      type="button"
-      className={["btn", "btn-danger", ...(optClass ? optClass : [])].join(" ")}
+    <Button
+      variant="danger"
+      className={[...(optClass ? optClass : [])].join(" ")}
       onClick={onClick}
       disabled={disabled}
     >
       <i className="bi bi-trash"></i>
-    </button>
+    </Button>
   );
 }

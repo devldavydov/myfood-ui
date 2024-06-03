@@ -13,6 +13,7 @@ import { ITableBodyRow } from "../common/table/TableBody";
 import Search from "../common/Search";
 import ButtonLink from "../common/button/ButtonLink";
 import Table from "../common/table/Table";
+import { Col, Row } from "react-bootstrap";
 
 const columns: ITableHeaderColumn[] = [
   {
@@ -112,11 +113,11 @@ export default function FoodList() {
 
   return (
     <>
-      <div className="row mb-3">
-        <div className="col-4">
+      <Row className="mb-3">
+        <Col xs={4}>
           <ButtonLink linkTo="/food/create" iconClass="bi-plus-square" />
-        </div>
-        <div className="col-8">
+        </Col>
+        <Col xs={8}>
           <Search
             optClass={["float-end"]}
             search={search}
@@ -125,8 +126,8 @@ export default function FoodList() {
               setCurrentPage(1);
             }}
           />
-        </div>
-      </div>
+        </Col>
+      </Row>
 
       <Loader showLoading={showLoading} />
 
