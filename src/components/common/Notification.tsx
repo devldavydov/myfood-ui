@@ -1,3 +1,5 @@
+import { Alert } from "react-bootstrap";
+
 export interface INotification {
   visible: boolean;
   cls?: string;
@@ -6,28 +8,15 @@ export interface INotification {
 
 export interface INotificationProps {
   notification: INotification;
-  onHide?(): void;
 }
 
-export default function Notification({
-  notification,
-  onHide,
-}: INotificationProps) {
+export default function Notification({ notification }: INotificationProps) {
   return (
     <>
       {notification.visible && (
-        <div
-          className={`alert alert-${notification.cls} alert-dismissible fade show`}
-        >
+        <Alert variant={notification.cls} dismissible>
           {notification.msg}
-          {onHide && (
-            <button
-              type="button"
-              className="btn-close"
-              onClick={onHide}
-            ></button>
-          )}
-        </div>
+        </Alert>
       )}
     </>
   );

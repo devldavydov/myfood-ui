@@ -3,6 +3,7 @@ import TableHeader, {
   ITableHeaderColumn,
   ITableHeaderColumnSort,
 } from "./TableHeader";
+import { Table as TableRB } from "react-bootstrap";
 
 export interface ITableProps {
   className?: string;
@@ -20,13 +21,13 @@ export default function Table({
   rows,
 }: ITableProps) {
   return (
-    <table className={className}>
+    <TableRB responsive className={className}>
       <TableHeader
         columns={columns}
         currentSort={currentSort}
         onSort={onSort}
       />
       <TableBody rows={rows} />
-    </table>
+    </TableRB>
   );
 }

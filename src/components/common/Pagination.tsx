@@ -1,3 +1,5 @@
+import { Pagination as PaginationRB } from "react-bootstrap";
+
 export interface IPaginationProps {
   itemsCount: number;
   pageSize: number;
@@ -14,6 +16,7 @@ export function paginate<T>(
   return items.slice(startIndex, startIndex + pageSize);
 }
 
+// TODO: if pages too many: https://react-bootstrap.netlify.app/docs/components/pagination#more-options
 export default function Pagination({
   itemsCount,
   pageSize,
@@ -27,23 +30,18 @@ export default function Pagination({
   }
 
   return (
-    <ul className="pagination">
+    <PaginationRB>
       {[...Array(pagesCount).keys()].map((p) => {
         return (
-          <li
+          <PaginationRB.Item
             key={p + 1}
-            className={"page-item" + (currentPage == p + 1 ? " active" : "")}
+            active={currentPage == p + 1}
+            onClick={() => onPageChange(p + 1)}
           >
-            <a
-              role="button"
-              className="page-link"
-              onClick={() => onPageChange(p + 1)}
-            >
-              {p + 1}
-            </a>
-          </li>
+            {p + 1}
+          </PaginationRB.Item>
         );
       })}
-    </ul>
+    </PaginationRB>
   );
 }

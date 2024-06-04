@@ -1,3 +1,5 @@
+import { Button, Form, InputGroup } from "react-bootstrap";
+
 export interface ISearchProps {
   optClass?: string[];
   search: string;
@@ -10,27 +12,20 @@ export default function Search({
   onSearchChange,
 }: ISearchProps) {
   return (
-    <div className={["input-group", ...(optClass ? optClass : [])].join(" ")}>
-      <span className="input-group-text" id="basic-addon2">
+    <InputGroup className={[...(optClass ? optClass : [])].join(" ")}>
+      <InputGroup.Text id="basic-addon1">
         <i className="bi bi-search"></i>
-      </span>
-      <input
-        type="text"
-        className="form-control"
+      </InputGroup.Text>
+      <Form.Control
         placeholder="Поиск"
         value={search}
         onChange={(e) => {
           onSearchChange(e.target.value);
         }}
       />
-      <span
-        role="button"
-        className="input-group-text"
-        id="basic-addon2"
-        onClick={() => onSearchChange("")}
-      >
+      <Button variant="outline-secondary" onClick={() => onSearchChange("")}>
         <i className="bi bi-x-lg"></i>
-      </span>
-    </div>
+      </Button>
+    </InputGroup>
   );
 }

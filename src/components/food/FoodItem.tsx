@@ -12,6 +12,7 @@ import Notification, { INotification } from "../common/Notification";
 import ButtonSave from "../common/button/ButtonSave";
 import ButtonDelete from "../common/button/ButtonDelete";
 import ButtonLink from "../common/button/ButtonLink";
+import { Col, Form, Row } from "react-bootstrap";
 
 export interface IFoodItemProps {
   isEdit: boolean;
@@ -115,56 +116,42 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
       )}
       {showItemForm && (
         <>
-          <form>
-            <div className="row mb-3">
-              <label htmlFor="name" className="col-sm-2 col-form-label fw-bold">
+          <Form>
+            <Form.Group as={Row} className="mb-3" controlId="name">
+              <Form.Label column sm={2} className="fw-bold">
                 Наименование
-              </label>
-              <div className="col-sm-4">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
                   defaultValue={foodItem.name}
                   onChange={(e) =>
                     setFoodItem({ ...foodItem, name: e.target.value })
                   }
                 />
-              </div>
-            </div>
-            <div className="row mb-3">
-              <label
-                htmlFor="brand"
-                className="col-sm-2 col-form-label fw-bold"
-              >
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="brand">
+              <Form.Label column sm={2} className="fw-bold">
                 Бренд
-              </label>
-              <div className="col-sm-4">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="brand"
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
                   defaultValue={foodItem.brand}
                   onChange={(e) =>
                     setFoodItem({ ...foodItem, brand: e.target.value })
                   }
                 />
-              </div>
-            </div>
-            <div className="row mb-3">
-              <label
-                htmlFor="cal100"
-                className="col-sm-2 col-form-label fw-bold"
-              >
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="cal100">
+              <Form.Label column sm={2} className="fw-bold">
                 ККал, 100г.
-              </label>
-              <div className="col-sm-4">
-                <input
-                  type="number"
-                  className="form-control"
-                  step="0.01"
-                  id="cal100"
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
                   defaultValue={foodItem.cal100}
+                  step="0.01"
+                  type="number"
                   onChange={(e) =>
                     setFoodItem({
                       ...foodItem,
@@ -172,22 +159,17 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
                     })
                   }
                 />
-              </div>
-            </div>
-            <div className="row mb-3">
-              <label
-                htmlFor="prot100"
-                className="col-sm-2 col-form-label fw-bold"
-              >
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="prot100">
+              <Form.Label column sm={2} className="fw-bold">
                 Белки, 100г.
-              </label>
-              <div className="col-sm-4">
-                <input
-                  type="number"
-                  className="form-control"
-                  id="prot100"
-                  step="0.01"
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
                   defaultValue={foodItem.prot100}
+                  step="0.01"
+                  type="number"
                   onChange={(e) =>
                     setFoodItem({
                       ...foodItem,
@@ -195,22 +177,17 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
                     })
                   }
                 />
-              </div>
-            </div>
-            <div className="row mb-3">
-              <label
-                htmlFor="fat100"
-                className="col-sm-2 col-form-label fw-bold"
-              >
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="fat100">
+              <Form.Label column sm={2} className="fw-bold">
                 Жиры, 100г.
-              </label>
-              <div className="col-sm-4">
-                <input
-                  type="number"
-                  className="form-control"
-                  id="fat100"
-                  step="0.01"
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
                   defaultValue={foodItem.fat100}
+                  step="0.01"
+                  type="number"
                   onChange={(e) =>
                     setFoodItem({
                       ...foodItem,
@@ -218,22 +195,17 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
                     })
                   }
                 />
-              </div>
-            </div>
-            <div className="row mb-3">
-              <label
-                htmlFor="carb100"
-                className="col-sm-2 col-form-label fw-bold"
-              >
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="carb100">
+              <Form.Label column sm={2} className="fw-bold">
                 Углеводы, 100г.
-              </label>
-              <div className="col-sm-4">
-                <input
-                  type="number"
-                  className="form-control"
-                  id="carb100"
-                  step="0.01"
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
                   defaultValue={foodItem.carb100}
+                  step="0.01"
+                  type="number"
                   onChange={(e) =>
                     setFoodItem({
                       ...foodItem,
@@ -241,26 +213,25 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
                     })
                   }
                 />
-              </div>
-            </div>
-            <div className="row mb-3">
-              <label
-                htmlFor="comment"
-                className="col-sm-2 col-form-label fw-bold"
-              >
+              </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-3" controlId="comment">
+              <Form.Label column sm={2} className="fw-bold">
                 Комментарий
-              </label>
-              <div className="col-sm-4">
-                <textarea
-                  className="form-control"
-                  id="comment"
+              </Form.Label>
+              <Col sm={4}>
+                <Form.Control
+                  as="textarea"
                   defaultValue={foodItem.comment}
                   onChange={(e) =>
-                    setFoodItem({ ...foodItem, comment: e.target.value })
+                    setFoodItem({
+                      ...foodItem,
+                      comment: e.target.value,
+                    })
                   }
                 />
-              </div>
-            </div>
+              </Col>
+            </Form.Group>
             <ButtonLink
               linkTo="/food"
               iconClass="bi-box-arrow-left"
@@ -277,7 +248,7 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
                 onClick={() => onDelete(foodItem.key)}
               />
             )}
-          </form>
+          </Form>
         </>
       )}
     </>

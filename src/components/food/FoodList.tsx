@@ -134,7 +134,7 @@ export default function FoodList() {
       <Notification notification={notification} />
 
       {showResult && (
-        <div className="table-responsive">
+        <>
           <Table
             className="table table-bordered table-hover"
             currentSort={sort}
@@ -184,7 +184,7 @@ export default function FoodList() {
             currentPage={currentPage}
             onPageChange={(idx: number) => setCurrentPage(idx)}
           />
-        </div>
+        </>
       )}
     </>
   );
