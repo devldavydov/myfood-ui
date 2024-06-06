@@ -19,36 +19,19 @@ export default function Navbar() {
         <NavbarRB.Toggle aria-controls="responsive-navbar-nav" />
         <NavbarRB.Collapse id="responsive-navbar-nav">
           <Nav>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              to="/food"
-            >
+            <NavLink to="/stats" className="nav-link">
+              Статистика
+            </NavLink>
+            <NavLink className="nav-link" to="/food">
               Еда
             </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              to="/journal"
-            >
+            <NavLink className="nav-link" to="/journal">
               Журнал
             </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              to="/weight"
-            >
+            <NavLink className="nav-link" to="/weight">
               Вес
             </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
-              }
-              to="/settings"
-            >
+            <NavLink className="nav-link" to="/settings">
               Настройки
             </NavLink>
           </Nav>

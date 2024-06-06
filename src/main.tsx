@@ -5,6 +5,7 @@ import "./index.css";
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider,
 } from "react-router-dom";
@@ -20,19 +21,15 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route errorElement={<RouteError />}>
-        <Route index element={<Stats />} />
+        <Route index element={<Navigate to="/stats" replace />} />
         <Route path="food" element={<FoodList />} />,
         <Route path="food/edit/:key" element={<FoodItem isEdit={true} />} />,
         <Route path="food/create" element={<FoodItem isEdit={false} />} />
         <Route path="journal" element={<Journal />} />,
         <Route path="weight" element={<Weight />} />
         <Route path="settings" element={<Settings />} />
-        <Route
-          path="*"
-          element={
-            <div className="alert alert-danger">Страница не найдена</div>
-          }
-        />
+        <Route path="stats" element={<Stats />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Route>
   )
