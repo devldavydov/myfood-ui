@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { IFood, getFoodList } from "../../services/FoodService";
 import Loader from "../common/Loader";
-import Notification, { INotification } from "../common/Notification";
 import Pagination, { paginate } from "../common/Pagination";
 import {
   ITableHeaderColumn,
@@ -14,6 +13,7 @@ import Search from "../common/Search";
 import ButtonLink from "../common/button/ButtonLink";
 import Table from "../common/table/Table";
 import { Col, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 const columns: ITableHeaderColumn[] = [
   {
@@ -53,9 +53,6 @@ export default function FoodList() {
   const [foodList, setFoodList] = useState<IFood[]>([]);
   const [showLoading, setShowLoading] = useState(true);
   const [showResult, setShowResult] = useState(false);
-  const [notification, setNotification] = useState<INotification>(
-    {} as INotification
-  );
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<ITableHeaderColumnSort>({
@@ -74,11 +71,7 @@ export default function FoodList() {
         setFoodList(result);
       })
       .catch((error: Error) => {
-        setNotification({
-          visible: true,
-          cls: "danger",
-          msg: `Ошибка: ${error.message}`,
-        });
+        toast.error(error.message);
       });
   }, []);
 
@@ -130,8 +123,6 @@ export default function FoodList() {
       </Row>
 
       <Loader showLoading={showLoading} />
-
-      <Notification notification={notification} />
 
       {showResult && (
         <>

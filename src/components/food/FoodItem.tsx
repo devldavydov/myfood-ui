@@ -8,11 +8,11 @@ import {
 } from "../../services/FoodService";
 import { useEffect, useState } from "react";
 import Loader from "../common/Loader";
-import Notification, { INotification } from "../common/Notification";
 import ButtonSave from "../common/button/ButtonSave";
 import ButtonDelete from "../common/button/ButtonDelete";
 import ButtonLink from "../common/button/ButtonLink";
 import { Col, Form, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
 
 export interface IFoodItemProps {
   isEdit: boolean;
@@ -23,9 +23,6 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
   const [showLoading, setShowLoading] = useState(isEdit);
   const [showLoadError, setShowLoadError] = useState(false);
   const [showItemForm, setShowItemForm] = useState(!isEdit);
-  const [notification, setNotification] = useState<INotification>(
-    {} as INotification
-  );
   const [btnDisabled, setBtnDisabled] = useState(false);
   const navigate = useNavigate();
   const { key } = useParams();
@@ -47,11 +44,7 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
         setShowItemForm(true);
       })
       .catch((error: Error) => {
-        setNotification({
-          visible: true,
-          cls: "danger",
-          msg: `Ошибка: ${error.message}`,
-        });
+        toast.error(error.message);
         setShowLoadError(true);
       });
   }, []);
@@ -59,7 +52,6 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
   const onDelete = (key: string) => {
     if (!confirm("Вы действительно хотите удалить еду?")) return;
 
-    setNotification({ visible: false });
     setBtnDisabled(true);
 
     delFood(key)
@@ -68,16 +60,11 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
       })
       .then(() => navigate("/food"))
       .catch((error: Error) => {
-        setNotification({
-          visible: true,
-          cls: "danger",
-          msg: `Ошибка: ${error.message}`,
-        });
+        toast.error(error.message);
       });
   };
 
   const onSave = () => {
-    setNotification({ visible: false });
     setBtnDisabled(true);
 
     setFood({
@@ -98,18 +85,13 @@ export default function FoodItem({ isEdit }: IFoodItemProps) {
       })
       .then(() => navigate("/food"))
       .catch((error: Error) => {
-        setNotification({
-          visible: true,
-          cls: "danger",
-          msg: `Ошибка: ${error.message}`,
-        });
+        toast.error(error.message);
       });
   };
 
   return (
     <>
       <Loader showLoading={showLoading} />
-      <Notification notification={notification} />
 
       {showLoadError && (
         <ButtonLink linkTo="/food" iconClass="bi-box-arrow-left" />
